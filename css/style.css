@@ -1,5 +1,4 @@
 body {
-    /* margin: 0; */
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
@@ -81,6 +80,24 @@ body {
 .nav-btn:hover {
     color: lightblue;
     border-bottom: 3px solid lightblue;
+}
+
+
+/* footer */
+
+.contein-footer {
+    width: 100%;
+    height: 7rem;
+    box-shadow: inset 0 1px 0 #e1e0e0;
+    background-color: #f8f8f8;
+    padding: 2rem 0 2rem;
+    margin-top: 233px;
+}
+
+.btn-links>* {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-right: 1.25rem;
 }
 
 

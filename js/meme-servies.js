@@ -26,8 +26,21 @@ var gImgs = [
 var gMeme = {
     selectedImgId: 2,
     selectedLineIdx: 1,
-    texts: ['', ''],
+    texts: [{
+            txt: '',
+            size: 20,
+            align: 'left',
+            color: 'red',
+        },
+        {
+            txt: '',
+            size: 20,
+            align: 'left',
+            color: 'red',
+        }
+    ],
 }
+
 
 function getmeme() {
     return gMeme;
@@ -47,7 +60,8 @@ function findLinkImg() {
 
 function toIncreaseText(elInputText) {
     if (!elInputText.value) return;
-    gSizeText += 10;
+    if (!gSwitchLine)
+        gSizeText += 10;
     gCtx.font = `${gSizeText}px Impact`;
 }
 
@@ -58,8 +72,11 @@ function toDecreaseText(elInputText) {
 }
 
 
-function toSwitchLines() {
+function toSwitchLines(elTextInput) {
     let line = gSwitchLine ? 2 : 1;
     gMeme.selectedLineIdx = line;
+    if (gMeme.texts[line - 1].txt) {
+        elTextInput.value = gMeme.texts[line - 1].txt;
+    }
     gSwitchLine = !gSwitchLine;
 }
