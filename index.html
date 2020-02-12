@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memes Generaitor</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body onload="onInit()">
+
+    <nav class="main-nav-container flex space-between align-center">
+        <div class="logo">Memes Generaitor</div>
+        <ul class="main-nav clean-list flex">
+            <li>
+                <button class="nav-btn" href="#">Gallery</button>
+            </li>
+            <li>
+                <button class="nav-btn" href="#">Memes</button>
+            </li>
+            <li>
+                <button class="nav-btn" href="#">About</button>
+            </li>
+        </ul>
+        <button class="menu-btn" onclick="toggleMenu()">☰</button>
+    </nav>
+
+
+
+    <div class="container-gallery">
+
+    </div>
+
+
+    <div class="modal" hidden>
+        <div class="canvas-container flex">
+
+            <div class="CloseButton" onclick="onCloseModal()">&times;</div>
+            <canvas class="canvas" id="my-canvas" height="450px" width="450px" style="border: 1px solid black;"></canvas>
+
+            <div class="btn-main">
+                <input onkeyup="onSaveText()" class="text-input" type="text" placeholder="text...">
+                <button onclick="onIncreaseText()"><img class="img-btn" src="/ICONS/increase font - icon.png"></button>
+                <button onclick="onDecreaseText()"><img class="img-btn" src="/ICONS/decrease font - icon.png"></button>
+                <button onclick="onSwitchLines()"><img class="img-btn" src="/ICONS/up-and-down-opposite-double-arrows-side-by-side.png"></button>
+            </div>
+
+        </div>
+    </div>
+
+
+    <script src="js/meme-servies.js"></script>
+    <script src="js/meme-controller.js"></script>
+</body>
+
+</html>
