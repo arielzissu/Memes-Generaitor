@@ -31,6 +31,9 @@ function onSaveText() {
     if (gMeme.selectedLineIdx === 2) {
         gMeme.texts[1].txt = elTextInput.value;
     }
+    if (gMeme.selectedLineIdx === 3) {
+        gMeme.texts[2].txt = elTextInput.value;
+    }
     drawImages();
 }
 
@@ -49,15 +52,13 @@ function drawImages() {
 
 function createText() {
     // drawRect(30);
-    gCtx.fillStyle = gMeme.texts[0].color;
-    gCtx.font = `${gMeme.texts[0].size}px Impact`;
-    gCtx.textAlign = gMeme.texts[0].align;
-    gCtx.fillText(gMeme.texts[0].txt, gMeme.texts[0].idxStart, gMeme.texts[0].coordY);
 
-    gCtx.fillStyle = gMeme.texts[1].color;
-    gCtx.font = `${gMeme.texts[1].size}px Impact`;
-    gCtx.textAlign = gMeme.texts[1].align;
-    gCtx.fillText(gMeme.texts[1].txt, gMeme.texts[1].idxStart, gMeme.texts[1].coordY);
+    gMeme.texts.forEach(text => {
+        gCtx.fillStyle = text.color;
+        gCtx.font = `${text.size}px Impact`;
+        gCtx.textAlign = text.align;
+        gCtx.fillText(text.txt, text.idxStart, text.coordY);
+    });
 }
 
 
@@ -121,4 +122,41 @@ function drawRect(y) {
     gCtx.stroke();
     gCtx.fillStyle = 'grey';
     gCtx.fillRect(0, y - 10, gElCanvas.width, y + 10);
+}
+
+
+function onAddLine() {
+    addingNewLine();
+    onSwitchLines();
+}
+
+
+function onResizeCanvas() {
+    var elContainer = document.querySelector('.canvas');
+    gElCanvas.width = elContainer.offsetWidth;
+    gElCanvas.height = elContainer.offsetHeight;
+    gMeme.texts.forEach(text => {
+        text.txt = '';
+        text.size = 30;
+        text.color = '#000000';
+        text.align = 'center';
+        text.idxStart = 225;
+    });
+    let elTextInput = document.querySelector('.text-input');
+    elTextInput.value = '';
+    var linkImg = findLinkImg();
+    var img = new Image();
+    img.src = linkImg;
+    img.onload = () => {
+        gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
+    }
+    var elColorInput = document.querySelector('.color-input');
+    elColorInput.value = '#000000';
+    clearCanvas();
+}
+
+function onDownloadCanvas(elLink) {
+    const data = gElCanvas.toDataURL();
+    elLink.href = data;
+    elLink.download = 'Your meme';
 }

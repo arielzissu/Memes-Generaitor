@@ -1,6 +1,7 @@
 'use strict'
 
-var gSwitchLine = true;
+var gSwitchLine = 1;
+var gLineIsAdd = false;
 
 var gImgs = [
     { id: 1, url: 'meme-imgs/1.jpg', keywords: ['happy'] },
@@ -43,7 +44,7 @@ var gMeme = {
             idxStart: 225,
         },
         {
-            txt: 'write here',
+            txt: '',
             size: 30,
             align: 'center',
             color: '#000000',
@@ -52,7 +53,6 @@ var gMeme = {
         },
     ]
 }
-
 
 function getmeme() {
     return gMeme;
@@ -68,8 +68,6 @@ function findLinkImg() {
     return linkImg;
 }
 
-
-
 function toIncreaseText(elInputText) {
     if (!elInputText.value) return;
     let curridx = gMeme.selectedLineIdx;
@@ -84,34 +82,41 @@ function toDecreaseText(elInputText) {
     gCtx.font = `${gMeme.texts[curridx - 1].size}px Impact`;
 }
 
-
 function toSwitchLines(elTextInput, elColorInput) {
-    var line = gSwitchLine ? 2 : 1;
+    var line;
+    if (gSwitchLine === 1) {
+        line = 2;
+        gSwitchLine = 2;
+    } else if (gSwitchLine === 2) {
+        if (gLineIsAdd) {
+            line = 3;
+            gSwitchLine = 3;
+        } else {
+            line = 1;
+            gSwitchLine = 1;
+        }
+    } else if (gSwitchLine === 3) {
+        line = 1;
+        gSwitchLine = 1;
+    }
     gMeme.selectedLineIdx = line;
     elTextInput.value = gMeme.texts[line - 1].txt;
-    gSwitchLine = !gSwitchLine;
-
     elColorInput.value = gMeme.texts[line - 1].color;
 }
-
 
 function createColor(color) {
     let curridx = gMeme.selectedLineIdx;
     gMeme.texts[curridx - 1].color = color;
-
 }
-
 
 function toUpText() {
     let curridx = gMeme.selectedLineIdx;
     gMeme.texts[curridx - 1].coordY -= 10;
-
 }
 
 function toDownText() {
     let curridx = gMeme.selectedLineIdx;
     gMeme.texts[curridx - 1].coordY += 10;
-
 }
 
 function changeAlign(side) {
@@ -136,6 +141,15 @@ function changeAlign(side) {
             }
             break;
     }
+}
+
+function addingNewLine() {
+    gLineIsAdd = !gLineIsAdd;
+    gSwitchLine = 2;
+}
 
 
+function clearCanvas() {
+    gMeme.selectedLineIdx = 1;
+    gLineIsAdd = false;
 }

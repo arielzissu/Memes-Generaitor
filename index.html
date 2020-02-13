@@ -6,65 +6,125 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Memes Generaitor</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="./image/front-logo.png" />
 </head>
 
 <body onload="onInit()">
 
+
+    <!-- nav -->
     <nav class="main-nav-container flex space-between align-center">
-        <div class="logo">Memes Generaitor</div>
+        <div class="logo"><img src="./ICONS/logo.png" /></div>
         <ul class="main-nav clean-list flex">
             <li>
-                <button class="nav-btn" href="#">Gallery</button>
+                <div class="nav-btn nav-btn1 flex align-center" href="#">Gallery</div>
             </li>
             <li>
-                <button class="nav-btn" href="#">Memes</button>
-            </li>
-            <li>
-                <button class="nav-btn" href="#">About</button>
+                <div class="nav-btn nav-btn2 flex align-center" href="#">About</div>
             </li>
         </ul>
         <!-- <button class="menu-btn" onclick="toggleMenu()">☰</button> -->
     </nav>
 
+    <div class="searching"></div>
 
 
+    <!-- Gallery -->
     <div class="container-gallery">
 
     </div>
 
 
+    <!-- modal -->
     <div class="modal" hidden>
-        <div class="canvas-container flex">
 
-            <div class="CloseButton" onclick="onCloseModal()">&times;</div>
+        <nav class="main-nav-container flex space-between align-center">
+            <div class="logo"><img src="./ICONS/logo.png" /></div>
+            <ul class="main-nav clean-list flex">
+                <li>
+                    <div class="nav-btn nav-btn1 flex align-center" class="CloseButton" onclick="onCloseModal()" href="#">Gallery</div>
+                </li>
+                <li>
+                    <div class="nav-btn nav-btn2 flex align-center" href="#">About</div>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="modal-container flex">
+
             <canvas class="canvas" id="my-canvas" height="450px" width="450px" style="border: 1px solid black;"></canvas>
 
-            <div class="btn-main">
-                <input onkeyup="onSaveText()" class="text-input" type="text" placeholder="text...">
-                <input class="color-input" onchange="onChangeColor(this.value)" type="color">
-                <button onclick="onIncreaseText()"><img class="img-btn" src="./ICONS/increase font - icon.png"></button>
-                <button onclick="onDecreaseText()"><img class="img-btn" src="./ICONS/decrease font - icon.png"></button>
-                <button onclick="onSwitchLines()"><img class="img-btn" src="./ICONS/up-and-down-opposite-double-arrows-side-by-side.png"></button>
-                <button onclick="onUpText()"><img class="img-btn" src="./ICONS/arrow-up.png"></button>
-                <button onclick="onDownText()"><img class="img-btn" src="./ICONS/arrow-down.png"></button>
-                <button onclick="onChangeAlign('left')"><img class="img-btn" src="./ICONS/align-to-left.png"></button>
-                <button onclick="onChangeAlign('center')"><img class="img-btn" src="./ICONS/center-text-alignment.png"></button>
-                <button onclick="onChangeAlign('right')"><img class="img-btn" src="./ICONS/align-to-right.png"></button>
+            <div class="btn-main flex direction-col">
+                <div class="input-text">
+                    <input onkeyup="onSaveText()" class="text-input" type="text" placeholder="text...">
+                </div>
+                <div class="flex">
+                    <button onclick="onSwitchLines()"><img class="img-btn" src="./ICONS/up-and-down-opposite-double-arrows-side-by-side.png"></button>
+                    <button onclick="onAddLine()"><img class="img-btn" src="./ICONS/add.png"></button>
+                    <button onclick="onResizeCanvas()"><img class="img-btn" src="./ICONS/trash.png"></button>
+                    <button onclick="onUpText()"><img class="img-btn" src="./ICONS/arrow-up.png"></button>
+                    <button onclick="onDownText()"><img class="img-btn" src="./ICONS/arrow-down.png"></button>
+                </div>
+                <div class="flex">
+                    <button onclick="onIncreaseText()"><img class="img-btn" src="./ICONS/increase font - icon.png"></button>
+                    <button onclick="onDecreaseText()"><img class="img-btn" src="./ICONS/decrease font - icon.png"></button>
+                    <button onclick="onChangeAlign('left')"><img class="img-btn" src="./ICONS/align-to-left.png"></button>
+                    <button onclick="onChangeAlign('center')"><img class="img-btn" src="./ICONS/center-text-alignment.png"></button>
+                    <button onclick="onChangeAlign('right')"><img class="img-btn" src="./ICONS/align-to-right.png"></button>
+                    <button><img class="img-btn" src="./ICONS/text stroke.png"></button>
+                    <input class="color-input" onchange="onChangeColor(this.value)" type="color">
+                </div>
+                <div class="share">
+                    <button>Share</button>
+                    <button><a href="#" onclick="downloadCanvas(this)" download="">Download</a></button>
+                </div>
             </div>
 
         </div>
+
+        <footer class="contein-footer1 flex direction-col space-around align-center">
+            <div class="logo"><img src="./ICONS/logo.png" /></div>
+            <div class="text-footer">© 2020 Memes.com - all rights reserved 2019 - ArielZissu</div>
+        </footer>
+
     </div>
 
-    <footer class="contein-footer flex direction-col space-around align-center">
-        <div class="logo">Memes Generaitor</div>
-        <div class="text-footer">© 2020 Memes.com - All Rights Reserved - Find more free Templates at ariel.com</div>
-        <div class="btn-links flex">
-            <button>t</button>
-            <button>f</button>
-            <button>i</button>
-            <button>g</button>
+
+    <!-- container -->
+    <section class="container-section flex">
+        <img class="ariel-img" src="./image/ariel.jpg" alt="My picture">
+        <div class="flex direction-col">
+            <h2>Ariel Zissu</h2>
+            <p>is a fictional character, one of the six main characters who appears on the American sitcom Friends (1994–2004). Created by David Crane and Marta Kauffman</p>
+            <ul class="container-links flex clean-list">
+                <li class="list-inline-item">
+                    <button class="links" href="https://www.facebook.com/arielzissu">
+                            <img class="me-images" src="./ICONS/facebook-logo.png">
+                        </button>
+                </li>
+                <li class="list-inline-item">
+                    <button class="links" href="https://www.facebook.com/arielzissu">
+                            <img class="me-images" src="./ICONS/linkedin-logo.png">
+                        </button>
+                </li>
+                <li class="list-inline-item">
+                    <button class="links" href="https://www.facebook.com/arielzissu">
+                            <img class="me-images" src="./ICONS/github-logo.png">
+                        </button>
+                </li>
+            </ul>
         </div>
+    </section>
+
+
+    <!-- footer -->
+    <footer class="contein-footer flex direction-col space-around align-center">
+        <div class="logo"><img src="./ICONS/logo.png" /></div>
+        <div class="text-footer">© 2020 Memes.com - all rights reserved 2019 - ArielZissu</div>
     </footer>
+
+
+
 
     <script src="js/meme-servies.js"></script>
     <script src="js/meme-controller.js"></script>
