@@ -41,9 +41,15 @@
 
             <div class="btn-main">
                 <input onkeyup="onSaveText()" class="text-input" type="text" placeholder="text...">
+                <input class="color-input" onchange="onChangeColor(this.value)" type="color">
                 <button onclick="onIncreaseText()"><img class="img-btn" src="./ICONS/increase font - icon.png"></button>
                 <button onclick="onDecreaseText()"><img class="img-btn" src="./ICONS/decrease font - icon.png"></button>
                 <button onclick="onSwitchLines()"><img class="img-btn" src="./ICONS/up-and-down-opposite-double-arrows-side-by-side.png"></button>
+                <button onclick="onUpText()"><img class="img-btn" src="./ICONS/arrow-up.png"></button>
+                <button onclick="onDownText()"><img class="img-btn" src="./ICONS/arrow-down.png"></button>
+                <button onclick="onChangeAlign('left')"><img class="img-btn" src="./ICONS/align-to-left.png"></button>
+                <button onclick="onChangeAlign('center')"><img class="img-btn" src="./ICONS/center-text-alignment.png"></button>
+                <button onclick="onChangeAlign('right')"><img class="img-btn" src="./ICONS/align-to-right.png"></button>
             </div>
 
         </div>

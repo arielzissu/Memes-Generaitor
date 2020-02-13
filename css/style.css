@@ -12,7 +12,6 @@ body {
 
 .box-img {
     width: 100px;
-    height: 100px;
     cursor: pointer;
 }
 
@@ -32,6 +31,7 @@ body {
 
 .canvas {
     width: 40%;
+    height: 40%;
     margin-right: 1.5rem;
 }
 

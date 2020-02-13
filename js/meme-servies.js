@@ -1,5 +1,5 @@
 'use strict'
-var gSizeText = 30;
+
 var gSwitchLine = true;
 
 var gImgs = [
@@ -28,17 +28,29 @@ var gMeme = {
     selectedLineIdx: 1,
     texts: [{
             txt: '',
-            size: 20,
-            align: 'left',
-            color: 'red',
+            size: 30,
+            align: 'center',
+            color: '#000000',
+            coordY: 50,
+            idxStart: 225,
         },
         {
             txt: '',
-            size: 20,
-            align: 'left',
-            color: 'red',
-        }
-    ],
+            size: 30,
+            align: 'center',
+            color: '#000000',
+            coordY: 400,
+            idxStart: 225,
+        },
+        {
+            txt: 'write here',
+            size: 30,
+            align: 'center',
+            color: '#000000',
+            coordY: 225,
+            idxStart: 225,
+        },
+    ]
 }
 
 
@@ -60,23 +72,70 @@ function findLinkImg() {
 
 function toIncreaseText(elInputText) {
     if (!elInputText.value) return;
-    if (!gSwitchLine)
-        gSizeText += 10;
-    gCtx.font = `${gSizeText}px Impact`;
+    let curridx = gMeme.selectedLineIdx;
+    gMeme.texts[curridx - 1].size += 2;
+    gCtx.font = `${gMeme.texts[curridx - 1].size}px Impact`;
 }
 
 function toDecreaseText(elInputText) {
     if (!elInputText.value) return;
-    gSizeText -= 10;
-    gCtx.font = `${gSizeText}px Impact`;
+    let curridx = gMeme.selectedLineIdx;
+    gMeme.texts[curridx - 1].size -= 2;
+    gCtx.font = `${gMeme.texts[curridx - 1].size}px Impact`;
 }
 
 
-function toSwitchLines(elTextInput) {
-    let line = gSwitchLine ? 2 : 1;
+function toSwitchLines(elTextInput, elColorInput) {
+    var line = gSwitchLine ? 2 : 1;
     gMeme.selectedLineIdx = line;
-    if (gMeme.texts[line - 1].txt) {
-        elTextInput.value = gMeme.texts[line - 1].txt;
-    }
+    elTextInput.value = gMeme.texts[line - 1].txt;
     gSwitchLine = !gSwitchLine;
+
+    elColorInput.value = gMeme.texts[line - 1].color;
+}
+
+
+function createColor(color) {
+    let curridx = gMeme.selectedLineIdx;
+    gMeme.texts[curridx - 1].color = color;
+
+}
+
+
+function toUpText() {
+    let curridx = gMeme.selectedLineIdx;
+    gMeme.texts[curridx - 1].coordY -= 10;
+
+}
+
+function toDownText() {
+    let curridx = gMeme.selectedLineIdx;
+    gMeme.texts[curridx - 1].coordY += 10;
+
+}
+
+function changeAlign(side) {
+    let curridx = gMeme.selectedLineIdx;
+    switch (side) {
+        case 'left':
+            {
+                gMeme.texts[curridx - 1].align = 'left';
+                gMeme.texts[curridx - 1].idxStart = 10;
+            }
+            break;
+        case 'center':
+            {
+                gMeme.texts[curridx - 1].align = 'center';
+                gMeme.texts[curridx - 1].idxStart = gElCanvas.width / 2;
+            }
+            break;
+        case 'right':
+            {
+                gMeme.texts[curridx - 1].align = 'right';
+                gMeme.texts[curridx - 1].idxStart = gElCanvas.width - 10;
+            }
+            break;
+    }
+
+
 }
