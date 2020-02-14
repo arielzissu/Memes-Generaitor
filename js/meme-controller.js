@@ -11,7 +11,6 @@ function onInit() {
     _renderImgs();
 }
 
-
 function _renderImgs() {
     let elgallery = document.querySelector('.container-gallery');
     let strHtml = ``;
@@ -20,8 +19,6 @@ function _renderImgs() {
     });
     elgallery.innerHTML = strHtml;
 }
-
-
 
 function onSaveText() {
     let elTextInput = document.querySelector('.text-input');
@@ -47,12 +44,7 @@ function drawImages() {
     }
 }
 
-
-
-
 function createText() {
-    // drawRect(30);
-
     gMeme.texts.forEach(text => {
         gCtx.fillStyle = text.color;
         gCtx.font = `${text.size}px Impact`;
@@ -61,18 +53,20 @@ function createText() {
     });
 }
 
-
-
 function onOpenModal(imgId) {
     let elModal = document.querySelector('.modal');
     gMeme.selectedImgId = imgId;
     elModal.hidden = false;
     drawImages();
+    let elBody = document.querySelector('body');
+    elBody.style.overflow = 'hidden';
 }
 
 function onCloseModal() {
     let elModal = document.querySelector('.modal');
     elModal.hidden = true;
+    let elBody = document.querySelector('body');
+    elBody.style.overflow = 'scroll';
 }
 
 function onIncreaseText() {
@@ -104,10 +98,10 @@ function onUpText() {
     drawImages();
 }
 
-
 function onDownText() {
     toDownText();
     drawImages();
+    consolelog('a:::', gMeme.texts[0].coordY);
 }
 
 function onChangeAlign(side) {
@@ -124,12 +118,10 @@ function drawRect(y) {
     gCtx.fillRect(0, y - 10, gElCanvas.width, y + 10);
 }
 
-
 function onAddLine() {
     addingNewLine();
     onSwitchLines();
 }
-
 
 function onResizeCanvas() {
     var elContainer = document.querySelector('.canvas');
@@ -156,7 +148,45 @@ function onResizeCanvas() {
 }
 
 function onDownloadCanvas(elLink) {
-    const data = gElCanvas.toDataURL();
+    const data = gElCanvas.toDataURL('image/jpeg', 1.0);
     elLink.href = data;
-    elLink.download = 'Your meme';
+    elLink.download = 'Your Meme';
 }
+
+
+function toggleMenu() {
+    document.body.classList.toggle('menu-open');
+}
+
+
+
+// function uploadImg(elForm, ev) {
+//     ev.preventDefault();
+//     document.getElementById('imgData').value = gCanvas.toDataURL("image/jpeg");
+
+//     // A function to be called if request succeeds
+//     function onSuccess(uploadedImgUrl) {
+//         uploadedImgUrl = encodeURIComponent(uploadedImgUrl)
+//         document.querySelector('.share-container').innerHTML = `
+//         <a class="btn" href="https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}'); return false;">
+//            Share   
+//         </a>`
+//     }
+
+//     doUploadImg(elForm, onSuccess);
+// }
+
+// function doUploadImg(elForm, onSuccess) {
+//     var formData = new FormData(elForm);
+//     fetch('http://ca-upload.com/here/upload.php', {
+//             method: 'POST',
+//             body: formData
+//         })
+//         .then(function(res) {
+//             return res.text()
+//         })
+//         .then(onSuccess)
+//         .catch(function(err) {
+//             console.error(err)
+//         })
+// }

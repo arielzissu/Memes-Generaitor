@@ -11,6 +11,7 @@
 
 <body onload="onInit()">
 
+    <div class="screen" onclick="toggleMenu()"></div>
 
     <!-- nav -->
     <nav class="main-nav-container flex space-between align-center">
@@ -23,7 +24,7 @@
                 <div class="nav-btn nav-btn2 flex align-center" href="#">About</div>
             </li>
         </ul>
-        <!-- <button class="menu-btn" onclick="toggleMenu()">☰</button> -->
+        <button class="menu-btn-hamburger" onclick="toggleMenu()">☰</button>
     </nav>
 
     <div class="searching"></div>
@@ -38,6 +39,8 @@
     <!-- modal -->
     <div class="modal" hidden>
 
+        <div class="screen" onclick="toggleMenu()"></div>
+
         <nav class="main-nav-container flex space-between align-center">
             <div class="logo"><img src="./ICONS/logo.png" /></div>
             <ul class="main-nav clean-list flex">
@@ -48,31 +51,32 @@
                     <div class="nav-btn nav-btn2 flex align-center" href="#">About</div>
                 </li>
             </ul>
+            <button class="menu-btn-hamburger" onclick="toggleMenu()">☰</button>
         </nav>
 
         <div class="modal-container flex">
 
-            <canvas class="canvas" id="my-canvas" height="450px" width="450px" style="border: 1px solid black;"></canvas>
+            <canvas class="canvas" id="my-canvas" height="450px" width="450px"></canvas>
 
             <div class="btn-main flex direction-col">
                 <div class="input-text">
                     <input onkeyup="onSaveText()" class="text-input" type="text" placeholder="text...">
+                    <input class="color-input" onchange="onChangeColor(this.value)" type="color">
                 </div>
-                <div class="flex">
+                <div class="all-button flex ">
                     <button onclick="onSwitchLines()"><img class="img-btn" src="./ICONS/up-and-down-opposite-double-arrows-side-by-side.png"></button>
                     <button onclick="onAddLine()"><img class="img-btn" src="./ICONS/add.png"></button>
                     <button onclick="onResizeCanvas()"><img class="img-btn" src="./ICONS/trash.png"></button>
                     <button onclick="onUpText()"><img class="img-btn" src="./ICONS/arrow-up.png"></button>
                     <button onclick="onDownText()"><img class="img-btn" src="./ICONS/arrow-down.png"></button>
                 </div>
-                <div class="flex">
+                <div class="all-button flex ">
                     <button onclick="onIncreaseText()"><img class="img-btn" src="./ICONS/increase font - icon.png"></button>
                     <button onclick="onDecreaseText()"><img class="img-btn" src="./ICONS/decrease font - icon.png"></button>
                     <button onclick="onChangeAlign('left')"><img class="img-btn" src="./ICONS/align-to-left.png"></button>
                     <button onclick="onChangeAlign('center')"><img class="img-btn" src="./ICONS/center-text-alignment.png"></button>
                     <button onclick="onChangeAlign('right')"><img class="img-btn" src="./ICONS/align-to-right.png"></button>
                     <button><img class="img-btn" src="./ICONS/text stroke.png"></button>
-                    <input class="color-input" onchange="onChangeColor(this.value)" type="color">
                 </div>
                 <div class="share">
                     <button>Share</button>
