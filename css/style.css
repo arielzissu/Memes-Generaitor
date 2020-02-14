@@ -92,6 +92,16 @@ body {
     display: none;
 }
 
+.share-btn>* {
+    background-color: #ff7f00;
+    height: 3rem;
+    width: 6rem;
+}
+
+.share-btn>*:first-child {
+    margin-right: 10px;
+}
+
 
 /* Nav Bar */
 
@@ -166,7 +176,7 @@ body {
 }
 
 
-/* me */
+/* me - container*/
 
 .container-section {
     height: 15rem;
@@ -185,6 +195,10 @@ body {
     height: 39px;
     border-radius: 12px;
     background-color: #ff7f00;
+}
+
+.all-links-container {
+    margin-right: 30px;
 }
 
 
@@ -212,12 +226,40 @@ body {
 
 /* Media Queries */
 
+@media (max-width: 1132px) {
+    .container-gallery {
+        background-color: #e3e3e3;
+        height: 100%;
+        display: grid;
+        gap: 10px;
+        padding: 15px;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+    .box-img {
+        max-width: 250px;
+    }
+}
+
 @media (max-width: 1000px) {
     .canvas {
         width: 27rem;
         height: 28rem;
         margin-right: 2rem;
         margin-top: 15px;
+    }
+}
+
+@media (max-width: 982) {
+    .container-gallery {
+        background-color: #e3e3e3;
+        height: 100%;
+        display: grid;
+        gap: 10px;
+        padding: 15px;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+    .box-img {
+        max-width: 300px;
     }
 }
 
@@ -321,6 +363,27 @@ body {
     .nav-btn1 {
         margin-bottom: .5px;
     }
+    .container-section {
+        flex-direction: column;
+    }
+    .ariel-img {
+        height: 14rem;
+        width: 16rem;
+        border-radius: 50%;
+        margin: auto;
+        margin-bottom: -70px;
+    }
+    .container-gallery {
+        background-color: #e3e3e3;
+        height: 100%;
+        display: grid;
+        gap: 10px;
+        padding: 15px;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    }
+    .box-img {
+        max-width: 220px;
+    }
 }
 
 @media (max-width: 772px) {
@@ -330,5 +393,33 @@ body {
         align-items: center;
         padding: unset;
         border: unset;
+    }
+}
+
+@media (max-width: 742px) {
+    .container-gallery {
+        background-color: #e3e3e3;
+        height: 100%;
+        display: grid;
+        gap: 10px;
+        padding: 15px;
+        grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    }
+    .box-img {
+        max-width: 190px;
+    }
+}
+
+@media (max-width: 652px) {
+    .container-gallery {
+        background-color: #e3e3e3;
+        height: 100%;
+        display: grid;
+        gap: 10px;
+        padding: 15px;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+    .box-img {
+        max-width: 140px;
     }
 }
