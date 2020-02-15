@@ -101,7 +101,6 @@ function onUpText() {
 function onDownText() {
     toDownText();
     drawImages();
-    consolelog('a:::', gMeme.texts[0].coordY);
 }
 
 function onChangeAlign(side) {
@@ -148,45 +147,12 @@ function onResizeCanvas() {
 }
 
 function onDownloadCanvas(elLink) {
-    const data = gElCanvas.toDataURL('image/jpeg', 1.0);
+    const data = gElCanvas.toDataURL('image/jpg');
     elLink.href = data;
-    elLink.download = 'Your Meme';
+    elLink.download = 'my-meme.jpg';
 }
 
 
 function toggleMenu() {
     document.body.classList.toggle('menu-open');
 }
-
-
-
-// function uploadImg(elForm, ev) {
-//     ev.preventDefault();
-//     document.getElementById('imgData').value = gCanvas.toDataURL("image/jpeg");
-
-//     // A function to be called if request succeeds
-//     function onSuccess(uploadedImgUrl) {
-//         uploadedImgUrl = encodeURIComponent(uploadedImgUrl)
-//         document.querySelector('.share-container').innerHTML = `
-//         <a class="btn" href="https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}'); return false;">
-//            Share   
-//         </a>`
-//     }
-
-//     doUploadImg(elForm, onSuccess);
-// }
-
-// function doUploadImg(elForm, onSuccess) {
-//     var formData = new FormData(elForm);
-//     fetch('http://ca-upload.com/here/upload.php', {
-//             method: 'POST',
-//             body: formData
-//         })
-//         .then(function(res) {
-//             return res.text()
-//         })
-//         .then(onSuccess)
-//         .catch(function(err) {
-//             console.error(err)
-//         })
-// }
