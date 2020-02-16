@@ -33,8 +33,8 @@ body {
 
 .modal {
     background-color: rgb(255, 255, 255);
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     position: fixed;
     text-align: center;
     cursor: pointer;
@@ -102,6 +102,13 @@ body {
     margin-right: 10px;
 }
 
+.btn-download {
+    color: unset;
+    text-decoration-line: unset;
+    height: 100%;
+    width: 100%;
+}
+
 
 /* Nav Bar */
 
@@ -136,6 +143,11 @@ body {
 
 .nav-btn1 {
     margin-right: 20px;
+}
+
+.search-btn {
+    height: 20px;
+    width: 20px;
 }
 
 
@@ -265,14 +277,14 @@ body {
 
 @media (max-width: 900px) {
     .modal {
-        transform: translate(0%, 0%);
+        /* transform: translate(0%, 0%); */
         overflow: scroll;
         height: 100%;
         width: 100%;
     }
     .canvas {
         width: 100%;
-        height: 80vh;
+        height: 80%;
         align-items: center;
         padding: 20px;
         border: unset;
@@ -312,7 +324,7 @@ body {
         position: fixed;
         right: 0;
         top: 0;
-        height: 100vh;
+        height: 100%;
         background-color: #fff;
         border-left: 1px solid #d2d2d2;
         box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
@@ -388,7 +400,7 @@ body {
 
 @media (max-width: 772px) {
     .canvas {
-        width: 100vw;
+        width: 100%;
         height: unset;
         align-items: center;
         padding: unset;

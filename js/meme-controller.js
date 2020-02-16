@@ -9,6 +9,11 @@ function onInit() {
     gElCanvas = document.querySelector('#my-canvas');
     gCtx = gElCanvas.getContext('2d');
     _renderImgs();
+    gElCanvas.addEventListener('touchmove', (ev) => { ev.defaultPrevented() }, event);
+    gElCanvas.addEventListener('touchstart', (ev) => { ev.defaultPrevented() }, event);
+    var hammerTime = new Hammer(gElCanvas);
+    hammerTime.on('panup pandown panleft panright', touchMove);
+
 }
 
 function _renderImgs() {
@@ -40,6 +45,7 @@ function drawImages() {
     img.src = linkImg;
     img.onload = () => {
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
+
         createText();
     }
 }
@@ -49,8 +55,9 @@ function createText() {
         gCtx.fillStyle = text.color;
         gCtx.font = `${text.size}px Impact`;
         gCtx.textAlign = text.align;
-        gCtx.fillText(text.txt, text.idxStart, text.coordY);
+        gCtx.fillText(text.txt, text.coordX, text.coordY);
     });
+    markerLine();
 }
 
 function onOpenModal(imgId) {
@@ -73,19 +80,24 @@ function onIncreaseText() {
     let elInputText = document.querySelector('.text-input');
     toIncreaseText(elInputText);
     drawImages();
+    changeRectSize(1);
 }
 
 function onDecreaseText() {
     let elInputText = document.querySelector('.text-input');
     toDecreaseText(elInputText);
     drawImages();
+    changeRectSize(-1);
 }
 
 function onSwitchLines() {
     let elTextInput = document.querySelector('.text-input');
     elTextInput.value = '';
     var elColorInput = document.querySelector('.color-input');
+    offMarkLine();
+    drawImages();
     toSwitchLines(elTextInput, elColorInput);
+    markerLine();
 }
 
 function onChangeColor(color) {
@@ -108,15 +120,6 @@ function onChangeAlign(side) {
     drawImages();
 }
 
-function drawRect(y) {
-    gCtx.beginPath();
-    gCtx.rect(0, y - 10, gElCanvas.width, y + 10);
-    gCtx.strokeStyle = 'black';
-    gCtx.stroke();
-    gCtx.fillStyle = 'grey';
-    gCtx.fillRect(0, y - 10, gElCanvas.width, y + 10);
-}
-
 function onAddLine() {
     addingNewLine();
     onSwitchLines();
@@ -131,7 +134,7 @@ function onResizeCanvas() {
         text.size = 30;
         text.color = '#000000';
         text.align = 'center';
-        text.idxStart = 225;
+        text.coordX = 225;
     });
     let elTextInput = document.querySelector('.text-input');
     elTextInput.value = '';
@@ -149,10 +152,19 @@ function onResizeCanvas() {
 function onDownloadCanvas(elLink) {
     const data = gElCanvas.toDataURL('image/jpg');
     elLink.href = data;
-    elLink.download = 'my-meme.jpg';
 }
 
 
 function toggleMenu() {
     document.body.classList.toggle('menu-open');
+}
+
+function touchMove(ev) {
+    let currLine = gMeme.selectedLineIdx;
+    gMeme.texts[currLine - 1].coordX = ev.offsetX;
+    gMeme.texts[currLine - 1].coordY = ev.offsetY;
+    console.log('ev.offsetX', ev.offsetX);
+    console.log('ev.offsetY', ev.offsetY);
+    drawImages();
+
 }

@@ -2,6 +2,8 @@
 
 var gSwitchLine = 1;
 var gLineIsAdd = false;
+var prevX;
+var prevY;
 
 var gImgs = [
     { id: 1, url: 'meme-imgs/1.jpg', keywords: ['happy'] },
@@ -33,7 +35,7 @@ var gMeme = {
             align: 'center',
             color: '#000000',
             coordY: 50,
-            idxStart: 225,
+            coordX: 225,
         },
         {
             txt: '',
@@ -41,7 +43,7 @@ var gMeme = {
             align: 'center',
             color: '#000000',
             coordY: 400,
-            idxStart: 225,
+            coordX: 225,
         },
         {
             txt: '',
@@ -49,7 +51,7 @@ var gMeme = {
             align: 'center',
             color: '#000000',
             coordY: 225,
-            idxStart: 225,
+            coordX: 225,
         },
     ]
 }
@@ -125,19 +127,19 @@ function changeAlign(side) {
         case 'left':
             {
                 gMeme.texts[curridx - 1].align = 'left';
-                gMeme.texts[curridx - 1].idxStart = 10;
+                gMeme.texts[curridx - 1].coordX = 10;
             }
             break;
         case 'center':
             {
                 gMeme.texts[curridx - 1].align = 'center';
-                gMeme.texts[curridx - 1].idxStart = gElCanvas.width / 2;
+                gMeme.texts[curridx - 1].coordX = gElCanvas.width / 2;
             }
             break;
         case 'right':
             {
                 gMeme.texts[curridx - 1].align = 'right';
-                gMeme.texts[curridx - 1].idxStart = gElCanvas.width - 10;
+                gMeme.texts[curridx - 1].coordX = gElCanvas.width - 10;
             }
             break;
     }
@@ -152,4 +154,78 @@ function addingNewLine() {
 function clearCanvas() {
     gMeme.selectedLineIdx = 1;
     gLineIsAdd = false;
+}
+
+function drawRect(y) {
+    let currLine = gMeme.selectedLineIdx;
+    let currSize = gMeme.texts[currLine - 1].size;
+    gCtx.beginPath();
+    gCtx.rect(0, y - 30 - (currSize / 3), gElCanvas.width, 35 + (currSize / 2.5));
+    gCtx.strokeStyle = 'black';
+    gCtx.stroke();
+    gCtx.fillStyle = 'rgba(199, 191, 191, 0.15)';
+    gCtx.fillRect(0, y - 30 - (currSize / 3), gElCanvas.width, 35 + (currSize / 2.5));
+}
+
+function markerLine() {
+    let currLine = gMeme.selectedLineIdx;
+    let y = gMeme.texts[currLine - 1].coordY;
+    drawRect(y);
+}
+
+function offMarkLine() {
+    let currLine = gMeme.selectedLineIdx;
+    let y = gMeme.texts[currLine - 1].coordY;
+    closeRect(y);
+}
+
+function closeRect(y) {
+    let currLine = gMeme.selectedLineIdx;
+    let currSize = gMeme.texts[currLine - 1].size;
+    gCtx.beginPath();
+    gCtx.rect(0, y - 30 - (currSize / 3), gElCanvas.width, 35 + (currSize / 2.5));
+    gCtx.strokeStyle = '';
+    gCtx.stroke();
+    gCtx.fillStyle = 'rgba(199, 191, 191, 0)';
+    gCtx.fillRect(0, y - 30 - (currSize / 3), gElCanvas.width, 35 + (currSize / 2.5));
+}
+
+function changeRectSize(num) {
+    let currLine = gMeme.selectedLineIdx;
+    gMeme.texts[currLine - 1].size += (1 * num);
+}
+
+function canvasClicked(ev) {
+    prevX = ev.offsetX;
+    prevY = ev.offsetY;
+    console.log('offsetX:', prevX);
+    console.log('offsetY:', prevY);
+    let currLine = gMeme.selectedLineIdx;
+    let currSize = gMeme.texts[currLine - 1].size;
+    let y = gMeme.texts[currLine - 1].coordY;
+    console.log('currSize:///', currSize);
+    console.log('prevY >:   ', y - 30 - (currSize / 3));
+    console.log('prevY <:   ', 35 + (currSize / 2.5));
+    if (prevY >= (y - 30 - (currSize / 3)) && prevY <= (y + 35 + (currSize / 2.5))) {
+        console.log('yes');
+        if (ev.type === 'mousedown') {
+            gElCanvas.addEventListener('mousemove', moving);
+            gElCanvas.addEventListener('mouseup', stopMoving);
+            gElCanvas.addEventListener('touchmove', moving);
+        }
+
+    }
+
+}
+
+
+function moving(ev) {
+    let currLine = gMeme.selectedLineIdx;
+    gMeme.texts[currLine - 1].coordX = ev.offsetX;
+    gMeme.texts[currLine - 1].coordY = ev.offsetY;
+    drawImages();
+}
+
+function stopMoving(ev) {
+    gElCanvas.removeEventListener('mousemove', moving);
 }

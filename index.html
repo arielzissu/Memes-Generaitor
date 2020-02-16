@@ -7,6 +7,7 @@
     <title>Memes Generaitor</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="./image/front-logo.png" />
+
 </head>
 
 <body onload="onInit()">
@@ -30,6 +31,7 @@
     <div class="searching">
         <h2>Searching</h2>
         <input type="search" placeholder="Search..." name="" id="">
+        <button><img class="search-btn" src="./ICONS/search-icon.png" alt=""></button>
     </div>
 
 
@@ -45,7 +47,7 @@
         <div class="screen" onclick="toggleMenu()"></div>
 
         <nav class="main-nav-container flex space-between align-center">
-            <div class="logo"><img src="./ICONS/logo.png" /></div>
+            <div onclick="onCloseModal()" class="logo"><img src="./ICONS/logo.png" /></div>
             <ul class="main-nav clean-list flex">
                 <li>
                     <div class="nav-btn nav-btn1 flex align-center" class="CloseButton" onclick="onCloseModal()" href="#">Gallery</div>
@@ -59,7 +61,7 @@
 
         <div class="modal-container flex">
 
-            <canvas class="canvas" id="my-canvas" height="450px" width="450px"></canvas>
+            <canvas class="canvas" onmousedown="canvasClicked(event)" id="my-canvas" height="450px" width="450px"></canvas>
 
             <div class="btn-main flex direction-col">
                 <div class="input-text">
@@ -83,7 +85,7 @@
                 </div>
                 <div class="share-btn">
                     <button>Share</button>
-                    <button><a href="#" onclick="downloadCanvas(this)" download="">Download</a></button>
+                    <button><a class="btn-download" href="#" onclick="downloadCanvas(this)" download="my meme.jpg">Download</a></button>
                 </div>
             </div>
 
@@ -105,18 +107,18 @@
             <p>is a fictional character, one of the six main characters who appears on the American sitcom Friends (1994–2004). Created by David Crane and Marta Kauffman</p>
             <ul class="container-links flex clean-list">
                 <li class="list-inline-item">
-                    <button class="links" href="https://www.facebook.com/arielzissu">
-                            <img class="me-images" src="./ICONS/facebook-logo.png">
+                    <button class="links">
+                            <i class="fab fa-facebook-f"></i>
                     </button>
                 </li>
                 <li class="list-inline-item">
-                    <button class="links" href="https://www.facebook.com/arielzissu">
-                            <img class="me-images" src="./ICONS/linkedin-logo.png">
+                    <button class="links">
+                            <i class="fab fa-instagram"></i>
                     </button>
                 </li>
                 <li class="list-inline-item">
-                    <button class="links" href="https://www.facebook.com/arielzissu">
-                            <img class="me-images" src="./ICONS/github-logo.png">
+                    <button class="links">
+                        <i class="fab fa-github"></i>
                     </button>
                 </li>
             </ul>
@@ -132,7 +134,8 @@
 
 
 
-
+    <script src="https://kit.fontawesome.com/2d57abe871.js" crossorigin="anonymous"></script>
+    <script src="lib-hammer/hammer.min.js"></script>
     <script src="js/meme-servies.js"></script>
     <script src="js/meme-controller.js"></script>
 </body>
