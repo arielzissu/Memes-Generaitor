@@ -198,16 +198,10 @@ function changeRectSize(num) {
 function canvasClicked(ev) {
     prevX = ev.offsetX;
     prevY = ev.offsetY;
-    console.log('offsetX:', prevX);
-    console.log('offsetY:', prevY);
     let currLine = gMeme.selectedLineIdx;
     let currSize = gMeme.texts[currLine - 1].size;
     let y = gMeme.texts[currLine - 1].coordY;
-    console.log('currSize:///', currSize);
-    console.log('prevY >:   ', y - 30 - (currSize / 3));
-    console.log('prevY <:   ', 35 + (currSize / 2.5));
     if (prevY >= (y - 30 - (currSize / 3)) && prevY <= (y + 35 + (currSize / 2.5))) {
-        console.log('yes');
         if (ev.type === 'mousedown') {
             gElCanvas.addEventListener('mousemove', moving);
             gElCanvas.addEventListener('mouseup', stopMoving);
@@ -226,6 +220,6 @@ function moving(ev) {
     drawImages();
 }
 
-function stopMoving(ev) {
+function stopMoving() {
     gElCanvas.removeEventListener('mousemove', moving);
 }

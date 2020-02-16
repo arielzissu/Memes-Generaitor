@@ -9,10 +9,10 @@ function onInit() {
     gElCanvas = document.querySelector('#my-canvas');
     gCtx = gElCanvas.getContext('2d');
     _renderImgs();
-    gElCanvas.addEventListener('touchmove', (ev) => { ev.defaultPrevented() }, event);
-    gElCanvas.addEventListener('touchstart', (ev) => { ev.defaultPrevented() }, event);
-    var hammerTime = new Hammer(gElCanvas);
-    hammerTime.on('panup pandown panleft panright', touchMove);
+    // gElCanvas.addEventListener('touchmove', (ev) => { ev.defaultPrevented() }, event);
+    // gElCanvas.addEventListener('touchstart', (ev) => { ev.defaultPrevented() }, event);
+    // var hammerTime = new Hammer(gElCanvas);
+    // hammerTime.on('panup pandown panleft panright', touchMove);
 
 }
 
@@ -159,12 +159,9 @@ function toggleMenu() {
     document.body.classList.toggle('menu-open');
 }
 
-function touchMove(ev) {
-    let currLine = gMeme.selectedLineIdx;
-    gMeme.texts[currLine - 1].coordX = ev.offsetX;
-    gMeme.texts[currLine - 1].coordY = ev.offsetY;
-    console.log('ev.offsetX', ev.offsetX);
-    console.log('ev.offsetY', ev.offsetY);
-    drawImages();
-
-}
+// function touchMove(ev) {
+//     let currLine = gMeme.selectedLineIdx;
+//     gMeme.texts[currLine - 1].coordX = ev.offsetX;
+//     gMeme.texts[currLine - 1].coordY = ev.offsetY;
+//     drawImages();
+// }
